@@ -1,0 +1,268 @@
+import { Income, Expense, Savings, Budget, UserSettings } from '../types';
+
+export const INITIAL_USER_SETTINGS: UserSettings = {
+  currency: 'INR',
+  currencySymbol: '₹',
+  theme: 'dark',
+  userName: 'Aarav Sharma',
+  userEmail: 'aarav.sharma@example.com',
+  monthlySavingsTarget: 25000,
+};
+
+// Generates dynamic dates for the current and previous month so data is always fresh & realistic
+const now = new Date();
+const currentYear = now.getFullYear();
+const currentMonthNum = now.getMonth() + 1;
+const pad = (n: number) => String(n).padStart(2, '0');
+
+const currYM = `${currentYear}-${pad(currentMonthNum)}`;
+const prevDate = new Date(currentYear, currentMonthNum - 2, 1);
+const prevYM = `${prevDate.getFullYear()}-${pad(prevDate.getMonth() + 1)}`;
+
+export const INITIAL_INCOME: Income[] = [
+  {
+    id: 'inc-1',
+    amount: 85000,
+    source: 'Salary',
+    date: `${currYM}-01`,
+    paymentMethod: 'Bank Transfer',
+    description: 'Monthly Software Engineer Salary',
+    notes: 'Direct deposit from TechCorp India',
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 'inc-2',
+    amount: 18500,
+    source: 'Freelancing',
+    date: `${currYM}-08`,
+    paymentMethod: 'UPI',
+    description: 'Full-stack Dashboard UI design & implementation',
+    notes: 'Client via Upwork',
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 'inc-3',
+    amount: 4200,
+    source: 'Investment returns',
+    date: `${currYM}-14`,
+    paymentMethod: 'Bank Transfer',
+    description: 'Quarterly Mutual Fund Dividend',
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 'inc-4',
+    amount: 82000,
+    source: 'Salary',
+    date: `${prevYM}-01`,
+    paymentMethod: 'Bank Transfer',
+    description: 'Monthly Software Engineer Salary',
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 'inc-5',
+    amount: 12000,
+    source: 'Freelancing',
+    date: `${prevYM}-12`,
+    paymentMethod: 'UPI',
+    description: 'Website maintenance retainer',
+    createdAt: new Date().toISOString(),
+  },
+];
+
+export const INITIAL_EXPENSES: Expense[] = [
+  {
+    id: 'exp-1',
+    amount: 22000,
+    category: 'MONTHLY BILLS',
+    subcategory: 'House rent',
+    date: `${currYM}-02`,
+    paymentMethod: 'Bank Transfer',
+    vendor: 'Landlord Apartment 402',
+    description: 'Monthly Rent Payment',
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 'exp-2',
+    amount: 6450,
+    category: 'FOOD AND GROCERIES',
+    subcategory: 'Groceries',
+    date: `${currYM}-04`,
+    paymentMethod: 'UPI',
+    vendor: 'Nature Basket / Blinkit',
+    description: 'Bi-weekly organic groceries & pantry restock',
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 'exp-3',
+    amount: 1499,
+    category: 'MONTHLY BILLS',
+    subcategory: 'Wi-Fi',
+    date: `${currYM}-05`,
+    paymentMethod: 'Card',
+    vendor: 'Airtel Xstream Fiber',
+    description: 'Gigabit home internet',
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 'exp-4',
+    amount: 3200,
+    category: 'FOOD AND GROCERIES',
+    subcategory: 'Restaurants',
+    date: `${currYM}-07`,
+    paymentMethod: 'Card',
+    vendor: 'Bastian Bandra',
+    description: 'Dinner with colleagues',
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 'exp-5',
+    amount: 4500,
+    category: 'SHOPPING',
+    subcategory: 'Clothing',
+    date: `${currYM}-09`,
+    paymentMethod: 'UPI',
+    vendor: 'Zara',
+    description: 'Casual shirts and trousers',
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 'exp-6',
+    amount: 1800,
+    category: 'TRAVEL',
+    subcategory: 'Fuel',
+    date: `${currYM}-10`,
+    paymentMethod: 'Card',
+    vendor: 'Indian Oil Corp',
+    description: 'Car fuel refill',
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 'exp-7',
+    amount: 1100,
+    category: 'ENTERTAINMENT AND FUN',
+    subcategory: 'Movies',
+    date: `${currYM}-12`,
+    paymentMethod: 'UPI',
+    vendor: 'PVR Inox IMAX',
+    description: 'Weekend movie tickets & popcorn',
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 'exp-8',
+    amount: 850,
+    category: 'FOOD AND GROCERIES',
+    subcategory: 'Food delivery',
+    date: `${currYM}-15`,
+    paymentMethod: 'UPI',
+    vendor: 'Swiggy Gourmet',
+    description: 'Late night dinner order',
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 'exp-9',
+    amount: 21500,
+    category: 'MONTHLY BILLS',
+    subcategory: 'House rent',
+    date: `${prevYM}-02`,
+    paymentMethod: 'Bank Transfer',
+    vendor: 'Landlord Apartment 402',
+    description: 'Previous month rent',
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 'exp-10',
+    amount: 8200,
+    category: 'FOOD AND GROCERIES',
+    subcategory: 'Groceries',
+    date: `${prevYM}-05`,
+    paymentMethod: 'UPI',
+    vendor: 'Nature Basket',
+    description: 'Monthly supplies',
+    createdAt: new Date().toISOString(),
+  },
+];
+
+export const INITIAL_SAVINGS: Savings[] = [
+  {
+    id: 'sav-1',
+    amount: 15000,
+    category: 'Emergency fund',
+    date: `${currYM}-03`,
+    reason: 'Monthly allocated emergency stash transfer',
+    notes: 'Moved to high yield liquid fund',
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 'sav-2',
+    amount: 1200,
+    category: 'Shopping fund',
+    date: `${currYM}-09`,
+    reason: 'Resisted flash sale impulse buy for gadget',
+    notes: 'Saved 100% of planned impulse budget',
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 'sav-3',
+    amount: 8000,
+    category: 'Travel fund',
+    date: `${currYM}-11`,
+    reason: 'Dedicated allocation for upcoming Himachal vacation',
+    notes: 'Goal ₹50,000 by year end',
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 'sav-4',
+    amount: 15000,
+    category: 'Emergency fund',
+    date: `${prevYM}-04`,
+    reason: 'Monthly liquid stash',
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 'sav-5',
+    amount: 5000,
+    category: 'Future goals',
+    date: `${prevYM}-18`,
+    reason: 'Tech upgrade fund',
+    createdAt: new Date().toISOString(),
+  },
+];
+
+export const INITIAL_BUDGETS: Budget[] = [
+  {
+    id: 'b-1',
+    category: 'FOOD AND GROCERIES',
+    limit: 15000,
+    month: currYM,
+  },
+  {
+    id: 'b-2',
+    category: 'MONTHLY BILLS',
+    limit: 28000,
+    month: currYM,
+  },
+  {
+    id: 'b-3',
+    category: 'SHOPPING',
+    limit: 8000,
+    month: currYM,
+  },
+  {
+    id: 'b-4',
+    category: 'ENTERTAINMENT AND FUN',
+    limit: 5000,
+    month: currYM,
+  },
+  {
+    id: 'b-5',
+    category: 'TRAVEL',
+    limit: 6000,
+    month: currYM,
+  },
+  {
+    id: 'b-6',
+    category: 'OTHER',
+    limit: 4000,
+    month: currYM,
+  },
+];
